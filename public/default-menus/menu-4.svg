@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+    <defs>
+        <radialGradient id="bg-glow-4" cx="80%" cy="15%" r="65%">
+            <stop offset="0%" stop-color="#2E7D32" stop-opacity="0.22" />
+            <stop offset="60%" stop-color="#F0820C" stop-opacity="0.05" />
+            <stop offset="100%" stop-color="#F5F5F7" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id="card-border-4" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="white" stop-opacity="0.9" />
+            <stop offset="100%" stop-color="white" stop-opacity="0.4" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background Base -->
+    <rect width="1920" height="1080" fill="#F5F5F7" />
+    <rect width="1920" height="1080" fill="url(#bg-glow-4)" />
+
+    <!-- Top Floating Header Bar -->
+    <g transform="translate(160, 90)">
+        <rect width="1600" height="180" rx="28" fill="white" fill-opacity="0.82" stroke="url(#card-border-4)" stroke-width="1.5" />
+        
+        <!-- Brand / Screen Tag -->
+        <rect x="45" y="35" width="210" height="38" rx="19" fill="#2E7D32" fill-opacity="0.12" />
+        <text x="150" y="60" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="16" font-weight="700" fill="#2E7D32">TV 4 • POSITION 4</text>
+
+        <text x="45" y="125" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="46" font-weight="800" fill="#1C1C1E" letter-spacing="-0.5">Bowls & Fresh Greens</text>
+        <text x="45" y="155" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="20" font-weight="500" fill="#8E8E93">Knackige Frische & Vitalisierende Bowls</text>
+
+        <!-- Brand Icon / Signature -->
+        <circle cx="1520" cy="90" r="42" fill="#2E7D32" fill-opacity="0.1" />
+        <text x="1520" y="102" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="32" font-weight="800" fill="#2E7D32">★</text>
+    </g>
+
+    <!-- Menu Items List -->
+    
+        <g transform="translate(160, 380)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Tokyo Teriyaki Crunch Bowl</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Sushireis, Edamame, Avocado, Teriyaki-Huhn, Sesam-Dressing</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#2E7D32">15.90 €</text>
+        </g>
+        <g transform="translate(160, 485)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Wild Ocean Salmon Bowl</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Norwegischer Lachs, Wakame, Mango, Gurke, Ponzu-Sauce</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#2E7D32">17.50 €</text>
+        </g>
+        <g transform="translate(160, 590)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Green Goddess Halloumi Salad</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Gegrillter Zypriotischer Halloumi, Granatapfel, Walnuss-Vinaigrette</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#2E7D32">14.80 €</text>
+        </g>
+        <g transform="translate(160, 695)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Truffle Wild Mushroom Bowl</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Quinoa, sautierte Waldpilze, Baby-Spinat, Trüffelcreme (Vegan)</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#2E7D32">16.20 €</text>
+        </g>
+        <g transform="translate(160, 800)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Avocado Caesar Crunch</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Römersalat, Parmesan Crisps, gebeiztes Freiland-Ei, Knoblauchcroutons</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#2E7D32">13.90 €</text>
+        </g>
+        <g transform="translate(160, 905)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Extras & Toppings</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Garnelenspieß +6.50 € • Bio-Tofu +4.00 € • Extra Avocado +3.00 €</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#2E7D32">Details</text>
+        </g>
+
+    <!-- Bottom Signature Bar -->
+    <g transform="translate(160, 1010)">
+        <text x="0" y="20" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="15" font-weight="600" fill="#AEAEB2">ELITE SYSTEMS DIGITAL SIGNAGE • LIVE MENU</text>
+        <text x="1600" y="20" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="15" font-weight="500" fill="#AEAEB2">Alle Preise inkl. MwSt. • Frisch zubereitet</text>
+    </g>
+</svg>

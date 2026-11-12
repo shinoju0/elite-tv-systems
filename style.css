@@ -1,0 +1,1950 @@
+/**
+ * ==============================================================================
+ * ELITE SYSTEMS - APPLE DESIGN SYSTEM & LIQUID GLASS STYLESHEET
+ * ==============================================================================
+ * Basiert strikt auf den Richtlinien des Apple Design Skills (HIG):
+ * - Apple Light Mode: Reines Hellgrau (#F5F5F7) mit sanftem Orange-Mesh-Glow
+ * - Liquid Glass: Frosted Glass mit backdrop-filter blur(24px) & 1px Rand
+ * - Typografie: SF Pro Display & SF Pro Text Hierarchie
+ * - tvOS Fokus-Modell: Scale-Up, geschmeidige Springs und Halo-Glow
+ * - iOS Toggle Switches & iOS PIN Keypad
+ * - GPU-beschleunigter synchroner Schneefall & Goku-/Ruffy-Lauf & SpongeBob von TV 1 bis TV 6
+ * ==============================================================================
+ */
+
+/* ------------------------------------------------------------------------------
+   1. RESET & DESIGN TOKENS
+   ------------------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  /* Apple Light Mode Palette */
+  --bg-base: #F5F5F7;
+  --bg-secondary: #EBEBF0;
+  --text-primary: #1C1C1E;
+  --text-secondary: #636366;
+  --text-tertiary: #8E8E93;
+  --text-quaternary: #AEAEB2;
+
+  /* Brand Accents (aus Logo_transparent.png: Orange #F0820C & Weiß) */
+  --brand-orange: #F0820C;
+  --brand-orange-light: #FF9F2E;
+  --brand-orange-soft: rgba(240, 130, 12, 0.12);
+  --brand-orange-glow: rgba(240, 130, 12, 0.32);
+
+  /* Apple Liquid Glass Spezifikation */
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-bg-subtle: rgba(255, 255, 255, 0.55);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.75);
+  --glass-border-subtle: 1px solid rgba(0, 0, 0, 0.06);
+  --glass-blur: blur(24px) saturate(140%);
+
+  /* Apple Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+  --shadow-tv-focus: 0 0 0 3.5px var(--brand-orange), 0 20px 42px var(--brand-orange-glow);
+
+  /* Apple Spring Animation Curves */
+  --spring-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --radius-pill: 9999px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Apple Liquid Glass Utility */
+.apple-glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+}
+
+/* Sanfter Orange-Glow Mesh-Hintergrund */
+.apple-mesh-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 10% 15%, rgba(240, 130, 12, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 90% 25%, rgba(255, 159, 46, 0.09) 0%, transparent 40%),
+    radial-gradient(circle at 50% 85%, rgba(240, 130, 12, 0.07) 0%, transparent 50%),
+    var(--bg-base);
+}
+
+/* ------------------------------------------------------------------------------
+   2. SMART TV DASHBOARD VIEW
+   ------------------------------------------------------------------------------ */
+.tv-app-shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 36px;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+/* Header (Transparent - nur Buttons & Uhrzeit besitzen Hintergrund) */
+.tv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 2px;
+  margin-bottom: 24px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.tv-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tv-brand-logo {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.06));
+}
+
+.tv-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.tv-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tv-clock-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: var(--radius-pill);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.tv-icon-btn,
+.tv-text-btn {
+  padding: 8px 22px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s var(--spring-smooth), box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.tv-icon-btn:hover,
+.tv-text-btn:hover {
+  background: #FFFFFF;
+  box-shadow: var(--shadow-md);
+}
+
+.tv-text-btn.tv-focused {
+  background: #FFFFFF;
+  box-shadow: 0 0 0 2.5px var(--brand-orange), var(--shadow-md);
+  transform: scale(1.04);
+}
+
+/* 3x2 Kachel Grid (Minimalist Apple tvOS Poster Stil) */
+.tv-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tv-grid-3x2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 28px 24px;
+  flex: 1;
+}
+
+/* tvOS Poster Karte */
+.tv-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+  border: none;
+  transition: transform 0.28s var(--spring-smooth);
+}
+
+.tv-card-poster {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #F0820C 0%, #E66A00 50%, #FF9F2E 100%);
+  box-shadow: 0 10px 24px rgba(240, 130, 12, 0.22), var(--shadow-sm);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: transform 0.28s var(--spring-smooth), box-shadow 0.28s var(--spring-smooth), border-color 0.28s ease;
+}
+
+.tv-card-poster * {
+  pointer-events: none;
+}
+
+.card-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-video-standby {
+  width: 100%;
+  height: 100%;
+  background: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* tvOS Fokus Ring & Liveliness: NUR FÜR KACHELN */
+.tv-card.tv-focused .tv-card-poster {
+  outline: none;
+  transform: scale(1.018);
+  /* Sehr dezenter, ruhiger Zoom statt starkem Vergrößern */
+  box-shadow: 0 0 0 2.5px var(--brand-orange), 0 14px 28px -4px var(--brand-orange-glow);
+  border-color: rgba(255, 255, 255, 0.95);
+  z-index: 5;
+}
+
+.tv-card.tv-focused .tv-card-title {
+  color: var(--brand-orange);
+}
+
+.tv-card.tv-pressed .tv-card-poster {
+  transform: scale(0.99);
+}
+
+/* Neutrale, dezente Fokus-Zustände für Buttons und Controls (KEIN Orange, KEIN Zoom) */
+.tv-icon-btn.tv-focused {
+  outline: none;
+  transform: none;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.12), var(--shadow-sm);
+}
+
+.modal-close-btn.tv-focused {
+  outline: none;
+  transform: none;
+  background: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.15);
+}
+
+.apple-btn-secondary.tv-focused {
+  outline: none;
+  transform: none;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.12), var(--shadow-sm);
+}
+
+.apple-slider.tv-focused {
+  outline: none;
+  transform: none;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.15);
+}
+
+.ios-switch-slider.tv-focused {
+  outline: none;
+  transform: none;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.18);
+}
+
+/* Generischer Fallback für sonstige Buttons / Controls */
+[data-tv-focus="true"].tv-focused {
+  outline: none;
+  transform: none;
+}
+
+/* Dezente Beschriftung unter dem Poster */
+.tv-card-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 4px 0;
+}
+
+.tv-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+}
+
+.tv-card-tag {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: -0.1px;
+}
+
+/* ------------------------------------------------------------------------------
+   3. 100% VOLLBILD-MODUS & SYNCHRONE EFFEKTE (SCHNEE & GOKU)
+   ------------------------------------------------------------------------------ */
+.tv-fullscreen-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: #000000;
+  overflow: hidden;
+  display: none;
+  cursor: pointer;
+}
+
+.tv-fullscreen-overlay.active {
+  display: block;
+  animation: fullscreen-fade-in 0.35s var(--spring-smooth) forwards;
+}
+
+/* Mauszeiger des TV-Browsers im Vollbild verstecken, solange niemand
+   Fernbedienung oder Maus benutzt (gleicher Takt wie der Übersicht-Knopf) */
+.tv-fullscreen-overlay:not(.controls-visible),
+.tv-fullscreen-overlay:not(.controls-visible) * {
+  cursor: none !important;
+}
+
+@keyframes fullscreen-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1.01);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fullscreen-media,
+.fullscreen-image,
+.fullscreen-video,
+.fullscreen-iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: none;
+}
+
+.fullscreen-video {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Natives HTML/CSS Menü (100% SVG-frei für maximale Smart-TV Kompatibilität) */
+.fullscreen-default-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-base);
+  position: relative;
+  overflow: hidden;
+  padding: 40px;
+}
+
+/* ==============================================================================
+   CLEAN MENU PLACEHOLDER (TV VOLLBILD & KACHELN)
+   ============================================================================== */
+.clean-menu-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 40px;
+}
+
+.clean-menu-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--screen-accent, var(--brand-orange)) 0%, transparent 68%);
+  opacity: 0.12;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: pulseAura 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseAura {
+  0% { transform: scale(0.9) translate(-10px, -10px); opacity: 0.08; }
+  100% { transform: scale(1.15) translate(10px, 10px); opacity: 0.15; }
+}
+
+.clean-menu-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 64px 88px;
+  max-width: 920px;
+  width: 88%;
+  border-radius: 36px;
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(32px) saturate(140%);
+  -webkit-backdrop-filter: blur(32px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 24px 70px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  position: relative;
+  z-index: 1;
+}
+
+.clean-menu-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: 28px;
+}
+
+.clean-menu-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--screen-accent, var(--brand-orange));
+  box-shadow: 0 0 10px var(--screen-accent, var(--brand-orange));
+}
+
+.clean-menu-screen-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.clean-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.clean-menu-logo {
+  width: clamp(48px, 4.6vw, 72px);
+  height: clamp(48px, 4.6vw, 72px);
+  border-radius: 50%;
+  box-shadow: 0 6px 18px rgba(240, 130, 12, 0.28);
+  flex-shrink: 0;
+}
+
+.clean-menu-header-title {
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.clean-menu-title {
+  font-size: clamp(48px, 6vw, 84px);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  line-height: 1.05;
+  margin: 0;
+  background: linear-gradient(180deg, #1C1C1E 0%, #3A3A3C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.clean-menu-divider {
+  width: 80px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--screen-accent, var(--brand-orange));
+  margin: 28px 0 18px;
+  opacity: 0.9;
+}
+
+.clean-menu-brand {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* Kachel Thumbnail im 3x2 Grid - Komplett in edlem Elite-Orange */
+.clean-menu-thumb {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  text-align: center;
+  background: linear-gradient(135deg, #F0820C 0%, #E66A00 50%, #FF9F2E 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 24px rgba(240, 130, 12, 0.25);
+}
+
+/* Sanfter Apple Glanz-Schleier */
+.clean-menu-thumb::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+.clean-thumb-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0 0 6px 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.16);
+  position: relative;
+  z-index: 1;
+}
+
+.clean-thumb-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.clean-thumb-logo {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.clean-thumb-brand {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 1;
+}
+
+.media-type-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 9px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  border-radius: var(--radius-pill);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 3;
+}
+
+.video-badge {
+  background: rgba(240, 130, 12, 0.9);
+  color: #FFFFFF;
+}
+
+.photo-badge {
+  background: rgba(28, 28, 30, 0.7);
+  color: #FFFFFF;
+}
+
+/* Schneefall (auf allen TVs gleichzeitig, 100% GPU beschleunigt via translate3d) */
+.elite-snow-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 55;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.elite-snow-layer.active {
+  opacity: 1;
+}
+
+/* Weihnachten (christmas-engine.js): Standbilder an festen Stellen und Dauerschnee */
+.elite-christmas-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 56;
+}
+
+.elite-christmas-deco {
+  position: absolute;
+  height: auto;
+  animation: elite-christmas-fade-in 1s ease both;
+}
+
+.elite-christmas-snow {
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes elite-christmas-fade-in {
+  from { opacity: 0; }
+}
+
+/* Halloween (halloween-engine.js): Pixel-GIFs, Positionen kommen per transform */
+.elite-halloween-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 56;
+}
+
+.elite-halloween-gif {
+  position: absolute;
+  left: 0;
+  top: 0;
+  image-rendering: pixelated;
+  will-change: transform;
+}
+
+.elite-halloween-deco {
+  animation: elite-halloween-fade-in 0.8s ease both;
+}
+
+.elite-halloween-deco.elite-halloween-web {
+  opacity: 0.85;
+}
+
+/* Die dunkle Spinne bekommt einen hellen Rand, sonst verschwindet sie auf Schwarz */
+.elite-halloween-crawler {
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 3px rgba(190, 170, 255, 0.5));
+}
+
+.elite-halloween-thread {
+  position: absolute;
+  top: 0;
+  width: 1.5px;
+  background: rgba(235, 235, 235, 0.8);
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+@keyframes elite-halloween-fade-in {
+  from { opacity: 0; }
+}
+
+.elite-snowflake {
+  position: absolute;
+  top: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.75) 45%, rgba(255, 255, 255, 0) 72%);
+  /* Dezenter Rand, damit Flocken auch auf hellen Speisekarten sichtbar sind */
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.28);
+  transform: translate3d(0, -6vh, 0);
+  will-change: transform;
+  animation-name: snow-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes snow-fall {
+  0% {
+    transform: translate3d(0, -6vh, 0);
+  }
+
+  50% {
+    transform: translate3d(var(--snow-sway, 2vw), 52vh, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 110vh, 0);
+  }
+}
+
+/* ==========================================================================
+   LÄUFER-EFFEKT GOKU & RUFFY (1/3 Bildschirmhöhe, am unteren Rand, von links nach rechts)
+   ========================================================================== */
+.elite-runner {
+  /* Feste Größe je Figur (muss zu RUNNERS in runner-engine.js passen),
+     damit alle TVs mit derselben Strecke rechnen */
+  --runner-height: 33.333vh;
+  --runner-aspect: calc(200 / 176);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: var(--runner-height);
+  width: calc(var(--runner-height) * var(--runner-aspect));
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+  will-change: transform;
+}
+
+/* Ruffy-GIF 443x498: vom Hut bis zum Fuß so groß wie Goku */
+.elite-runner-ruffy {
+  --runner-height: calc(33.333vh * 1.137);
+  --runner-aspect: calc(443 / 498);
+}
+
+.elite-runner-sprite {
+  height: 100%;
+  width: 100%;
+  display: block;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Pixel-Art bleibt beim Vergrößern scharf */
+.elite-runner-ruffy .elite-runner-sprite {
+  image-rendering: pixelated;
+}
+
+.elite-runner.animating {
+  opacity: 1;
+  animation-name: runner-run-across;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* SpongeBob: kleiner, unten rechts auf TV 6, taucht von unten auf
+   (SpongeBob-Animation 354x254, unten im Original abgeschnitten) */
+.elite-corner {
+  position: absolute;
+  right: 3vw;
+  bottom: 0;
+  height: 17vh;
+  width: calc(17vh * 354 / 254);
+  pointer-events: none;
+  z-index: 60;
+  transform: translate3d(0, 105%, 0);
+  transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.15);
+  will-change: transform;
+}
+
+.elite-corner.visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.elite-corner-sprite {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Gon: unten in der Mitte von TV 4, in der Startpose etwa so groß wie SpongeBob
+   (Figur 17 % der Bildschirmhöhe; GIF 650x366, Figur stehend 352 px hoch,
+   Füße 9 px über der Unterkante).
+   Statt von unten aufzutauchen wird er ein- und ausgeblendet. */
+.elite-corner-gon {
+  left: 50%;
+  right: auto;
+  height: 17.68vh;
+  width: calc(17.68vh * 650 / 366);
+  bottom: calc(-17.68vh * 9 / 366);
+  transform: translate3d(-50%, 0, 0);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.elite-corner-gon.visible {
+  transform: translate3d(-50%, 0, 0);
+  opacity: 1;
+}
+
+.elite-corner-gon .elite-corner-sprite {
+  image-rendering: pixelated;
+}
+
+@keyframes runner-run-across {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(100vw, 0, 0);
+  }
+}
+
+.fullscreen-exit-hint,
+.fullscreen-floating-hint {
+  position: absolute;
+  bottom: 24px;
+  right: 32px;
+  padding: 8px 18px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-pill);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* Nur kurz nach Fernbedienung/Maus sichtbar (siehe tv-dashboard.js), nicht per
+   :hover – der Zeiger des TV-Browsers bleibt sonst dauerhaft über dem Bild stehen */
+.tv-fullscreen-overlay.controls-visible .fullscreen-exit-hint,
+.tv-fullscreen-overlay.controls-visible .fullscreen-floating-hint {
+  opacity: 1;
+}
+
+.hint-badge {
+  background: var(--brand-orange);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.hint-text {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------------------------
+   4. TV EINSTELLUNGS-MODAL (APPLE GLASS)
+   ------------------------------------------------------------------------------ */
+.tv-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+
+.tv-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tv-modal-card {
+  width: 90%;
+  max-width: 680px;
+  padding: 32px;
+  border-radius: 28px;
+  transform: scale(0.96) translateY(12px);
+  transition: transform 0.32s var(--spring-smooth);
+}
+
+.tv-modal.active .tv-modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 16px;
+}
+
+.modal-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.modal-close-btn {
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.setting-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.setting-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* iOS Toggle Switch (Originalgetreu HIG) */
+.ios-switch {
+  position: relative;
+  display: inline-block;
+  width: 51px;
+  height: 31px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.ios-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ios-switch-slider {
+  position: absolute;
+  inset: 0;
+  background-color: #E9E9EA;
+  border-radius: 31px;
+  transition: background-color 0.28s var(--spring-smooth);
+}
+
+.ios-switch-slider::before {
+  position: absolute;
+  content: "";
+  height: 27px;
+  width: 27px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.16);
+  transition: transform 0.28s var(--spring-smooth);
+}
+
+.ios-switch input:checked+.ios-switch-slider {
+  background-color: #34C759;
+}
+
+.ios-switch input:checked+.ios-switch-slider::before {
+  transform: translateX(20px);
+}
+
+/* Apple Slider */
+.apple-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 140px;
+  height: 6px;
+  border-radius: 3px;
+  background: #E5E5EA;
+  outline: none;
+}
+
+.apple-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.apple-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
+}
+
+.slider-control-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brand-orange);
+  background: var(--brand-orange-soft);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Buttons */
+.apple-btn-secondary {
+  padding: 9px 18px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Während Countdown/Effekt bzw. Upload (Handy-Admin) */
+.apple-btn-primary:disabled,
+.apple-btn-secondary:disabled {
+  opacity: 0.75;
+  cursor: default;
+}
+
+.apple-btn-secondary:hover {
+  background: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+
+.apple-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--brand-orange);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--brand-orange-glow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.apple-btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* QR-Code Sektion (Smartphone Handoff) */
+.qr-section {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  margin-top: 8px;
+}
+
+.qr-info-box {
+  flex: 1;
+}
+
+.qr-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  color: var(--brand-orange);
+  margin-bottom: 6px;
+}
+
+.qr-heading {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.qr-description {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.qr-url-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.qr-url-text {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--text-secondary);
+  word-break: break-all;
+  flex: 1;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.qr-copy-btn {
+  padding: 7px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.qr-code-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#qr-canvas {
+  width: 140px !important;
+  height: 140px !important;
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  background: #FFFFFF;
+  padding: 6px;
+}
+
+.qr-scan-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+/* ------------------------------------------------------------------------------
+   5. MOBILE SMARTPHONE ANSICHT (ADMIN PANEL & PIN SCHUTZ)
+   ------------------------------------------------------------------------------ */
+.mobile-app-shell {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* 5.1 iOS PIN SCREEN */
+.mobile-pin-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 24px;
+  min-height: 100vh;
+}
+
+.mobile-pin-screen.hidden {
+  display: none;
+}
+
+.pin-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  /* Über dem Hintergrund-Verlauf (.apple-mesh-glow) liegen, sonst ist er verdeckt */
+  position: relative;
+  z-index: 1;
+}
+
+.pin-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pin-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(240, 130, 12, 0.25);
+  flex-shrink: 0;
+}
+
+.pin-brand-badge {
+  display: inline-block;
+  padding: 5px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(240, 130, 12, 0.12);
+  color: var(--brand-orange);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(240, 130, 12, 0.2);
+}
+
+.pin-lock-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-orange);
+  margin-bottom: 14px;
+}
+
+.pin-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+}
+
+.pin-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+}
+
+/* 4 iOS Passcode Kreise */
+.pin-dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.pin-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #1D1D1F;
+  background-color: transparent;
+  box-sizing: border-box;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.pin-dot.filled {
+  background-color: #1D1D1F;
+  border-color: #1D1D1F;
+  transform: scale(1.18);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pin-dots-container.shake .pin-dot {
+  border-color: #FF3B30;
+  background-color: #FF3B30;
+}
+
+.pin-error-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: #FF3B30;
+  opacity: 0;
+  margin-bottom: 12px;
+  transition: opacity 0.2s ease;
+}
+
+.pin-error-text.visible {
+  opacity: 1;
+}
+
+/* Shake Animation bei falscher PIN */
+.pin-dots-container.shake {
+  animation: apple-pin-shake 0.4s var(--spring-bouncy);
+}
+
+
+@keyframes apple-pin-shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-14px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(14px);
+  }
+}
+
+/* Ultra-Clean Apple Keypad */
+.ios-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 20px;
+  max-width: 300px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.keypad-btn {
+  width: 78px;
+  height: 78px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s var(--spring-press), background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.keypad-btn:active {
+  background-color: rgba(0, 0, 0, 0.08);
+  transform: scale(0.92);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.key-num {
+  font-size: 32px;
+  font-weight: 350;
+  line-height: 1;
+  color: #1D1D1F;
+  letter-spacing: -0.5px;
+}
+
+.key-sub {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #8E8E93;
+  margin-top: 1px;
+  text-transform: uppercase;
+}
+
+.keypad-spacer {
+  width: 78px;
+  height: 78px;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.keypad-btn.key-action {
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+  color: #1D1D1F;
+}
+
+.key-del-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.keypad-btn.key-action:active {
+  background: rgba(0, 0, 0, 0.06);
+  transform: scale(0.92);
+}
+
+.mobile-logout-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.7);
+  border: var(--glass-border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.mobile-logout-btn:hover {
+  background: #FFFFFF;
+  color: var(--text-primary);
+}
+
+
+/* 5.2 MOBILE ADMIN DASHBOARD */
+.mobile-dashboard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-dashboard.hidden {
+  display: none;
+}
+
+.mobile-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  border-top: none;
+}
+
+.mobile-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-logo {
+  height: 38px;
+  width: auto;
+}
+
+.mobile-app-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.mobile-status-tag {
+  font-size: 11px;
+  color: var(--brand-orange);
+  font-weight: 600;
+}
+
+.mobile-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-pill-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.mobile-lock-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.mobile-scroll-content {
+  padding: 18px 16px 40px;
+  max-width: 580px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mobile-section-header {
+  margin-bottom: 12px;
+}
+
+.mobile-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand-orange);
+  letter-spacing: 0.6px;
+}
+
+.mobile-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+
+.mt-6 {
+  margin-top: 24px;
+}
+
+.mb-6 {
+  margin-bottom: 24px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mobile-card {
+  padding: 18px;
+  border-radius: var(--radius-lg);
+}
+
+.mobile-setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-setting-row.flex-col {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.setting-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.setting-caption {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-subtext {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.mobile-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.05);
+  margin: 16px 0;
+}
+
+/* Speisekarten Upload Karten */
+.mobile-screens-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobile-screen-card {
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.28s var(--spring-smooth), box-shadow 0.28s var(--spring-smooth);
+}
+
+.mobile-screen-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.screen-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.screen-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent, var(--brand-orange));
+  background: rgba(255, 255, 255, 0.95);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.screen-tag .pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent, var(--brand-orange));
+}
+
+.screen-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+
+.screen-thumbnail-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #EDEDF0;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.screen-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+/* SVG TV Icon Platzhalter */
+.screen-tv-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(150deg, #F9F9FA 0%, #EDEDF1 100%);
+  gap: 6px;
+  padding: 16px;
+  text-align: center;
+  user-select: none;
+}
+
+.tv-placeholder-symbol {
+  color: #8E8E93;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  margin-bottom: 2px;
+  transition: transform 0.28s var(--spring-smooth), color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.mobile-screen-card:hover .tv-placeholder-symbol {
+  transform: scale(1.08);
+  color: var(--brand-orange);
+  box-shadow: 0 6px 16px rgba(240, 130, 12, 0.15);
+}
+
+.tv-placeholder-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.tv-placeholder-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1D1D1F;
+  letter-spacing: -0.2px;
+}
+
+.tv-placeholder-hint {
+  font-size: 11px;
+  font-weight: 500;
+  color: #8E8E93;
+}
+
+/* Upload Fortschritt Overlay */
+.upload-progress-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(29, 29, 31, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #FFFFFF;
+  z-index: 10;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.progress-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: var(--brand-orange);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.progress-text {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.progress-bar-track {
+  width: 72%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #F0820C, #FFA439);
+  border-radius: 3px;
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.screen-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.action-btn-row {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn-row .apple-btn-primary,
+.action-btn-row .apple-btn-secondary {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  border-radius: var(--radius-md);
+  transition: transform 0.14s var(--spring-press), background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.action-btn-row .apple-btn-primary:active,
+.action-btn-row .apple-btn-secondary:active {
+  transform: scale(0.96);
+}
+
+.action-btn-subrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.apple-link-btn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px 6px;
+  transition: color 0.18s ease;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.apple-link-btn:hover {
+  color: var(--brand-orange);
+}
+
+.apple-link-btn.text-danger {
+  color: #FF3B30;
+}
+
+.apple-link-btn.text-danger:hover {
+  color: #D70015;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+/* Infokarte für kostenlose Videos */
+.mobile-tip-card {
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-left: 4px solid var(--brand-orange);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.tip-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--brand-orange);
+}
+
+.tip-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* Toast Benachrichtigung */
+.mobile-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: rgba(28, 28, 30, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.28s var(--spring-smooth);
+  z-index: 99999;
+}
+
+.mobile-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ------------------------------------------------------------------------------
+   6. RESPONSIVE BREAKPOINTS
+   ------------------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+  .tv-grid-3x2 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+}

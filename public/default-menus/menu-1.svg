@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+    <defs>
+        <radialGradient id="bg-glow-1" cx="80%" cy="15%" r="65%">
+            <stop offset="0%" stop-color="#F0820C" stop-opacity="0.22" />
+            <stop offset="60%" stop-color="#F0820C" stop-opacity="0.05" />
+            <stop offset="100%" stop-color="#F5F5F7" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id="card-border-1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="white" stop-opacity="0.9" />
+            <stop offset="100%" stop-color="white" stop-opacity="0.4" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background Base -->
+    <rect width="1920" height="1080" fill="#F5F5F7" />
+    <rect width="1920" height="1080" fill="url(#bg-glow-1)" />
+
+    <!-- Top Floating Header Bar -->
+    <g transform="translate(160, 90)">
+        <rect width="1600" height="180" rx="28" fill="white" fill-opacity="0.82" stroke="url(#card-border-1)" stroke-width="1.5" />
+        
+        <!-- Brand / Screen Tag -->
+        <rect x="45" y="35" width="210" height="38" rx="19" fill="#F0820C" fill-opacity="0.12" />
+        <text x="150" y="60" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="16" font-weight="700" fill="#F0820C">TV 1 • GANZ RECHTS</text>
+
+        <text x="45" y="125" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="46" font-weight="800" fill="#1C1C1E" letter-spacing="-0.5">Desserts, Shakes & Coffee</text>
+        <text x="45" y="155" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="20" font-weight="500" fill="#8E8E93">Feinste Pâtisserie & Barista Spezialitäten</text>
+
+        <!-- Brand Icon / Signature -->
+        <circle cx="1520" cy="90" r="42" fill="#F0820C" fill-opacity="0.1" />
+        <text x="1520" y="102" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="32" font-weight="800" fill="#F0820C">★</text>
+    </g>
+
+    <!-- Menu Items List -->
+    
+        <g transform="translate(160, 380)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Warmes Schoko-Lava Törtchen</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Flüssiger Valrhona-Kern, Madagaskar-Vanilleeis, frische Beeren</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#F0820C">9.50 €</text>
+        </g>
+        <g transform="translate(160, 485)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Karamellisiertes Pistazien-Tiramisu</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Mascarpone-Creme, sizilianische Pistazie, Savoiardi-Kekse</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#F0820C">8.90 €</text>
+        </g>
+        <g transform="translate(160, 590)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">New York Cheesecake Classic</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Himbeer-Minz-Spiegel, knuspriger Butterkeksboden</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#F0820C">7.80 €</text>
+        </g>
+        <g transform="translate(160, 695)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Salted Caramel Pretzel Shake</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Karamell-Eis, Meersalz, Brezel-Crunch, geschlagene Sahne</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#F0820C">7.50 €</text>
+        </g>
+        <g transform="translate(160, 800)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Double Pistachio Freakshake</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Pistazieneis, weißer Schokorand, geröstete Pistazienkerne</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#F0820C">8.50 €</text>
+        </g>
+        <g transform="translate(160, 905)">
+            <rect width="1600" height="88" rx="16" fill="white" fill-opacity="0.75" />
+            <text x="35" y="38" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="26" font-weight="700" fill="#1C1C1E">Barista Specialty Coffee</text>
+            <text x="35" y="68" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="18" font-weight="400" fill="#636366">Espresso, Flat White, Cappuccino mit Hafer- oder Bio-Vollmilch</text>
+            <text x="1565" y="52" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif" font-size="28" font-weight="800" fill="#F0820C">ab 3.20 €</text>
+        </g>
+
+    <!-- Bottom Signature Bar -->
+    <g transform="translate(160, 1010)">
+        <text x="0" y="20" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="15" font-weight="600" fill="#AEAEB2">ELITE SYSTEMS DIGITAL SIGNAGE • LIVE MENU</text>
+        <text x="1600" y="20" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif" font-size="15" font-weight="500" fill="#AEAEB2">Alle Preise inkl. MwSt. • Frisch zubereitet</text>
+    </g>
+</svg>
